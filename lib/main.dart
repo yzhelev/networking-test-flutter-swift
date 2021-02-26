@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final MethodChannel _methodChannel = const MethodChannel("com.bitpioneers.networking");
 
-  final String url = "https://jsonplaceholder.typicode.com/todos/1";
+  final String url = "https://jsonplaceholder.typicode.com/posts";
   Map<dynamic, dynamic> user;
 
   Future<Map<dynamic, dynamic>> getUser() async {
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final dynamic response = await _methodChannel.invokeMethod("request", {
         "url": url,
-        "method": "GET",
+        "method": "POST",
         "parameters": body,
         "headers": headers
       });
