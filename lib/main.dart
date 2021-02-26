@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final String url = "https://jsonplaceholder.typicode.com/posts";
   Map<dynamic, dynamic> user;
 
-  Future<Map<dynamic, dynamic>> getUser() async {
+  Future<Map<dynamic, dynamic>> makeRequest() async {
     final Map<String, dynamic> body = {
       "title": "our man",
       "body": "body example",
@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-                user = await getUser();
+                user = await makeRequest();
                 setState(() {});
               }
             )
