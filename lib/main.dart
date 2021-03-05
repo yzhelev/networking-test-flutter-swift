@@ -34,8 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final String url = "https://jsonplaceholder.typicode.com/posts";
   Map<dynamic, dynamic> user;
+  String error;
 
-  Future<Map<dynamic, dynamic>> makeRequest() async {
+  Future<dynamic> makeRequest() async {
     final Map<String, dynamic> body = {
       "title": "our man",
       "body": "body example",
@@ -93,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 30,),
             Text(
-              user != null ? parseUserToString(user) : "",
+              user != null ? parseUserToString(user) : (error ?? ""),
               style: Theme.of(context).textTheme.bodyText1,
               textAlign: TextAlign.center,
             ),
@@ -105,7 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-                user = await makeRequest();
+                final result = await makeRequest();
+                if (result is Map<dynamic, dynamic>) {
+                  user = result;
+                } else {
+                  error = result.toString();
+                }
                 setState(() {});
               }
             )
